@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2011 Google Inc. All Rights Reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>Fusion Tables API Example: Google Chart Tools Data Table</title>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', { packages: ['table'] });
+      var content_ID = [];
+	  var a_a = [];
+	  var a_b = [];
+	  var b_a = [];
+	  var b_b = [];
+	  var c_a = [];
+	  var c_b = [];
+	  var d_a = [];
+	  var d_b = [];
+	  var e_a = [];
+	  var e_b = [];
+	  var f_a = [];
+	  var f_b = [];
+	  var update = [] ;
+	  var numRows = 0 ;
+	  var numCols = 0 ;
+	  var count = -1 ;
+	 function a() {
+	 //alert("1");
+        var query = "SELECT"+ "'id_FC' as '代碼'"+ "," +" 'locate_latN' as 'locate_latN'" + "," + "'locate_latE' as 'locate_latE'" +  "," + "'locate_latW' as 'locate_latW'" +"," + "'locate_latS' as 'locate_latS'" + "," + "'locate_lonN' as 'locate_lonN'" +
+             "," + "'locate_lonE' as 'locate_lonE'" + "," + "'locate_lonW' as 'locate_lonW'" + "," + "'locate_lonS' as 'locate_lonS'" + "," + "'entrance_latA' as 'entrance_latA'" + "," + "'entrance_lonA' as 'entrance_lonA'" + "," + "'entrance_latB' as 'entrance_latB'" + "," + "'entrance_lonB' as 'entrance_lonB'" +'FROM 1UwqxMMnYqauNflEG0ij8s11anySJd-FxH5l0g1k';
+     
+        var queryText = encodeURIComponent(query);
+		 
+        var gvizQuery = new google.visualization.Query(
+            'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
+        		 
+   
+        gvizQuery.send(function(response) {
+		  numRows = response.getDataTable().getNumberOfRows();  
+          numCols = response.getDataTable().getNumberOfColumns(); 
+		  content_ID = [numRows];
+		  a_a = [numRows];
+	      a_b = [numRows];
+	      b_a = [numRows];
+	      b_b = [numRows];
+	      c_a = [numRows];
+	      c_b = [numRows];
+	      d_a = [numRows];
+	      d_b = [numRows];
+	      e_a = [numRows];
+	      e_b = [numRows];
+	      f_a = [numRows];
+	      f_b = [numRows];
+		  //update = [numRows];
+		  for(var i=0;i<numRows;i++)
+		  {
+		  content_ID[i]=response.getDataTable().getValue(i,0);
+		  a_a[i] = response.getDataTable().getValue(i,1);
+	      a_b[i] = response.getDataTable().getValue(i,2);
+	      b_a[i] = response.getDataTable().getValue(i,3);
+	      b_b[i] = response.getDataTable().getValue(i,4);
+	      c_a[i] = response.getDataTable().getValue(i,5);
+	      c_b[i] = response.getDataTable().getValue(i,6);
+	      d_a[i] = response.getDataTable().getValue(i,7);
+	      d_b[i] = response.getDataTable().getValue(i,8);
+	      e_a[i] = response.getDataTable().getValue(i,9);
+	      e_b[i] = response.getDataTable().getValue(i,10);
+	      f_a[i] = response.getDataTable().getValue(i,11);
+	      f_b[i] = response.getDataTable().getValue(i,12);
+		  //update[i] = response.getDataTable().getValue(i,13);
+		  }
+		  //alert(content_ID[2]+content_FN[2]+content_NA[2]);
+		   //alert("2");
+	 var db = window.openDatabase("Field_Inform21", "1.0", "飛場資訊", 1000000);
+	    db.transaction(function (tx) {
+	
+	 tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform21 (id_FC TEXT NOT NULL, locate_latN TEXT NOT NULL, locate_latE TEXT NOT NULL, locate_latW TEXT NOT NULL, locate_latS TEXT NOT NULL, locate_lonN TEXT NOT NULL, locate_lonE TEXT NOT NULL, locate_lonW TEXT NOT NULL, locate_lonS TEXT NOT NULL, entrance_latA TEXT NOT NULL, entrance_lonA TEXT NOT NULL, entrance_latB TEXT NOT NULL, entrance_lonB TEXT NOT NULL)');
+     //alert(content_ID[2]+content_FN[2]+content_NA[2]+"1");
+	 
+	 tx.executeSql(
+                    'SELECT id_FC FROM Field_Inform21',[],function(tx, rs) {
+					//alert("000");
+                    count = rs.rows.length ;
+					//alert(rs.rows.length);
+					//alert(count);
+					//alert(numRows);
+					
+					for(var iii=count;iii<=numRows-1;iii++)
+	 {
+	 //alert("456");
+	 var SQL = 'INSERT INTO Field_Inform21(id_FC, locate_latN, locate_latE, locate_latW, locate_latS, locate_lonN, locate_lonE, locate_lonW, locate_lonS, entrance_latA, entrance_lonA, entrance_latB, entrance_lonB) VALUES ("'+content_ID[iii]+'", "'+a_a[iii]+
+	            '", "'+a_b[iii]+'", "'+b_a[iii]+'", "'+b_b[iii]+'", "'+c_a[iii]+'", "'+c_b[iii]+'", "'+d_a[iii]+'", "'+d_b[iii]+'", "'+e_a[iii]+'", "'+e_b[iii]+'", "'+f_a[iii]+'", "'+f_b[iii]+'")';
+	 //alert("456");
+	 tx.executeSql(SQL);
+	 //alert(content_FA[iii]);
+	 }
+	 if(count!=0)
+	 for(var ii=0;ii<numRows;ii++)
+	 {
+	 //alert("456");
+	 var SQLL = 'UPDATE Field_Inform21 SET id_FC='+ content_ID[ii]+',locate_latN='+a_a[ii]+',locate_latE='+a_b[ii]+',locate_latW='+b_a[ii]+',locate_latS='+b_b[ii]+',locate_lonN='+c_a[ii]+',locate_lonE='+c_b[ii]+',locate_lonW='+d_a[ii]+',locate_lonS='+d_b[ii]+',entrance_latA='+e_a[ii]+',entrance_lonA='+e_b[ii]+',entrance_latB='+f_a[ii]+',entrance_lonB='+f_b[ii]+',update_FC='+update[ii]+' WHERE update_FC<'+update[ii]+' AND id_FC='+ content_ID[ii];
+	 tx.executeSql(SQLL);
+	 }
+                }
+                );
+				//alert(count);
+	 //for(var ii=count+1;ii<numRows;ii++)
+	 //{
+	 //var SQL = 'INSERT INTO Field_Inform21(ID_news,img_url,name_img,img_update) VALUES ("'+content_ID[ii]+'", "'+content_FN[ii]+
+	 //           '", "'+content_NA[ii]+'", "'+content_IU[ii]+'")';
+	 //tx.executeSql(SQL);
+	 //}
+	 //for(var ii=0;ii<numRows;ii++)
+	 //{
+	 //var SQL = 'UPDATE Field_Inform21 SET ID_news='+ content_ID[ii]+',img_url='+content_FN[ii]+',name_img='+content_NA[ii]+',img_update='+content_IU[ii]+'WHERE img_update<'+content_IU[ii];
+	 //tx.executeSql(SQL);
+	 //}
+	 //file_load();
+	});
+        });
+	 //alert("111");
+	 
+	 }
+     google.setOnLoadCallback(a);
+ 
+ 
+  function file_load()
+	{
+	// window.location="Main.html";
+	 window.location.assign("Main.html");
+	}
+    </script>
+  </head>
+  <body>
+    <div>
+      
+    </div>
+    <div id="visualization">	             
+    </div>
+  </body>
+</html>

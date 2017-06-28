@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+ <head>
+ 
+	<style type="text/css"> 
+	.picstyle {height:23.5%;}
+	.picstylem {height:23.5%;margin-top:2%;}
+	.picstyler {height:23.5%;margin-left:2%;}
+	.picstylerm {height:23.5%;margin-left:2%;margin-top:2%;}
+	.divstyle {height:60%;padding-top:38%;}
+	
+    .style {background-image:url(Main/2back.png); background-repeat: no-repeat; background-size: 100% 100%;}
+	</style>
+
+ 
+ <title>Main</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" src="jqFancyTransitions.1.8.min.js"></script>
+
+	
+	<script>
+	
+		$(document).bind('mobileinit', function(){
+			$.event.special.swipe.horizontalDistanceThreshold = 100; 
+			$.event.special.swipe.verticalDistanceThreshold = 120; 
+		});
+		
+		$(document).ready( function(){
+    $('#slideshowHolder').jqFancyTransitions({ 
+
+    effect: 'wave', // wave, zipper, curtain
+	width: 400, // width of panel
+
+	height: 130, // height of panel
+
+	strips: 20, // number of strips
+
+	delay: 5000, // delay between images in ms
+
+	stripDelay: 50, // delay beetwen strips in ms
+
+	titleOpacity: 0.7, // opacity of title
+
+	titleSpeed: 1000, // speed of title appereance in ms
+
+	position: 'curtain', // top, bottom, alternate, curtain
+
+	direction: 'random', // left, right, alternate, random, fountain, fountainAlternate
+
+	navigation: false, // prev and next navigation buttons
+
+	links: false // show images as links
+
+
+
+	});
+});
+
+		
+		
+	</script>
+
+
+</head>
+<body class="style" align="center" >
+ <div  data-role="page" id="main">
+    
+          
+	        <div data-role="content" class="style">  
+          
+			
+			<div class="divstyle">
+			
+			<a href="Test of Jquery Mobile.html" rel="external" data-transition="pop"><img src="Main/L1.png" class="picstylem"></a>
+			<img src="Main/R1.png" class="picstyler"><br>
+			<a href="new.html" rel="external" data-transition="pop"><img src="Main/L2.png" class="picstylem"></a>
+			<a href="Book.html" rel="external" data-transition="pop"><img src="Main/R2.png" class="picstylerm"></a><br>
+			<a href="YoutubeChannel.html" rel="external" data-transition="pop"><img src="Main/L3.png" class="picstylem"></a>
+			<img src="Main/R3.png" class="picstylerm"><br>
+			<a href="favorite.html" rel="external" data-transition="pop"><img src="Main/L4.png" class="picstylem"></a>
+			<img src="Main/R4.png" class="picstylerm"><br>
+			
+			</div>
+               
+
+            </div>
+  </div>
+  
+  
+		<div data-role="page" id="North_Info">	
+            <div data-role="header">
+               <div data-role="navbar">
+            <ul>
+                <li><a href="#">首頁</a></li>
+                <li><a href="#">最新商品</a></li>
+                <li><a href="#">登出</a></li>
+            </ul>
+        </div><!-- /navbar -->
+		
+          </div>
+		  
+           <div data-role="content"> 
+           <input type="search" name="search" id="searc" value="" />
+           <ul data-role="listview" data-inset="true" >
+	       <li><a href="Danshui01.html" rel="external" data-transition="pop" data-theme="b">淡水</a></li>
+	       <li><a href="#">天母</a></li>
+	       <li><a href="#">新店</a></li>
+	       <li><a href="#">淡水</a></li>
+           </ul>
+	       </div>
+		   
+		   <div data-role="footer">
+           <h2><a href="#main" style="text-decoration: none; " id="tohome" data-theme="b" data-transition="slide" data-direction="reverse" data-rel="back">上一頁</a></h2>
+           </div>
+
+        </div>
+
+
+
+ 
+</body>
+</html>

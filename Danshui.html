@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<title>台北淡水新市鎮飛行場</title>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 0px; padding: 0px }
+  #map_canvas {
+    width: 50%;
+    height: 300px;
+    padding: 0;
+    text-shadow: none;
+}
+
+ 
+
+</style>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&callback=initialize"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+	
+<script type="text/javascript">
+
+        //&callback=initialize 不知是否用call back
+    
+        var Fly_Field_Name = "台北淡水新市鎮飛行場";
+		
+	    var Fly_Field_Lat = 25.194224;
+		
+	    var Fly_Field_Lon= 121.43549;
+  
+      function initialize() {
+  
+           var latlng = new google.maps.LatLng(Fly_Field_Lat, Fly_Field_Lon);
+	
+           var myOptions = 
+		   {
+           zoom: 16,
+           center: latlng,
+           mapTypeId: google.maps.MapTypeId.ROADMAP
+	  //MapTypeId後面可以放的參數
+	  //ROADMAP 顯示 Google 地圖的正常、預設 2D 地圖方塊。
+      //SATELLITE 顯示圖形地圖方塊。
+      //HYBRID 會顯示圖形地圖方塊和特殊圖徵 (道路、城市名稱) 地圖方塊圖層的混合圖。
+      //TERRAIN 會顯示實際起伏的地圖方塊，以展現地形高度和水域圖徵 (山嶽、河流等)。
+           };
+	
+            var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+		
+	        var marker = new google.maps.Marker({
+            map:map,
+            draggable:true,
+            animation: google.maps.Animation.DROP,
+	        title: Fly_Field_Name,
+            position: latlng,
+        }); 
+		
+ 	
+    }
+	
+	     //$('.pagemap').live("pageshow", function() {
+		 
+                    //initialize();
+           // });
+
+</script>
+</head>
+
+  <body onload="initialize()">
+  
+  <div data-role="page" class="pagemap">
+
+	<div data-role="header">
+		<h1>台北淡水新市鎮</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" id="map_content" data-theme="b">	
+		 <div id="map_canvas"></div>
+		 <input type="button" value="導航" >
+		 <input type="button" value="加入我的最愛">
+	</div><!-- /content -->
+	
+	<div data-role="footer">
+		<h4>上一頁</h4>
+	</div><!-- /footer -->
+	
+</div><!-- /page -->
+
+    
+    
+  </body>
+</html>

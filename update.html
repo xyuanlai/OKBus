@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2011 Google Inc. All Rights Reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>Fusion Tables API Example: Google Chart Tools Data Table</title>
+	<style type="text/css">
+body {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+#map-canvas {
+  height: 500px;
+  width: 600px;
+}
+
+#visualization {
+  height: 400px;
+  width: 500px;
+}
+</style>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', { packages: ['table'] });
+      var content_ID = [3];
+	  var content_FN = [3];
+	  var content_NA = [3];
+     google.setOnLoadCallback(function(){
+	 alert("1");
+        var query = "SELECT"+ "'ID_news' as '代碼'"+ "," +" 'img_url' as '圖號'" + "," + "'name_img' as '圖名'" +
+            'FROM 1YNfzPGkBmKAmjS84ptJbZ5JDPJYvzkYm3yin3-A';
+          //var team = "001";
+          //query += " WHERE 'ID' = '" + team + "'";
+      
+        var queryText = encodeURIComponent(query);
+		 
+        var gvizQuery = new google.visualization.Query(
+            'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
+
+        gvizQuery.send(function(response) {
+		  for(var i=0;i<3;i++)
+		  {
+		  content_ID[i]=response.getDataTable().getValue(i,0);
+		  content_FN[i]=response.getDataTable().getValue(i,1);
+		  content_NA[i]=response.getDataTable().getValue(i,2);
+		  }
+		  alert(content_ID[2]+content_FN[2]+content_NA[2]);
+        });
+		//document.addEventListener("deviceready", onDeviceReady, false);
+        //var db = window.openDatabase("Field_Inform4", "1.0", "飛場資訊", 1000000);//name, version, display_name, size
+		
+		//function will be called when device ready
+      });
+     //google.setOnLoadCallback(drawTable);
+	 google.setOnLoadCallback(function(){
+	 alert("2");
+	 var db = window.openDatabase("Field_Inform4", "1.0", "飛場資訊", 1000000);
+	    db.transaction(function (tx) {
+	
+	 tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform4 (ID_news TEXT NOT NULL, img_url TEXT NOT NULL, name_img TEXT NOT NULL)');
+     alert(content_ID[2]+content_FN[2]+content_NA[2]+"1");
+	 for(var ii=0;ii<3;ii++)
+	 {
+	 //tx.executeSql('INSERT INTO Field_Inform4(ID) VALUES ("11")');
+	 var SQL = 'INSERT INTO Field_Inform4(ID_news,img_url,name_img) VALUES ("'+content_ID[ii]+'", "'+content_FN[ii]+'", "'+content_NA[ii]+'")';
+	 tx.executeSql(SQL);
+	 //alert(content_ID[ii]+content_FN[ii]+content_NA[ii]);
+	 //tx.executeSql('INSERT INTO Field_Inform4(Field_Name) VALUES ("'+content_FN[ii]+'")');
+	 //alert("1");
+	 }
+	});
+   // db.transaction(function (tx) {
+   //tx.executeSql('SELECT * FROM Field_Inform4', [], function (tx, results) {
+   //var len = results.rows.length, i;
+   //msg = "<p>Found rows: " + len + "</p>";
+   //	document.querySelector('#MyFavorite').innerHTML +=  msg;
+   //for(var iii=0;iii<3;iii++){
+   //alert("1");
+   //alert(results.rows.item(iii).Field_Name );
+   //}
+// }, null);
+// });
+}); 
+  
+    
+   // function queryDB(tx){
+	//alert("123");
+    //    tx.executeSql('SELECT * FROM Field_Inform4', [], querySuccess);
+	//	
+   // }
+ 
+    
+ 
+    </script>
+  </head>
+  <body>
+    <div>
+      
+    </div>
+    <div id="visualization">	             
+    </div>
+  </body>
+</html>

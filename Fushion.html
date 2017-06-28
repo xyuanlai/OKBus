@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2011 Google Inc. All Rights Reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>Fusion Tables API Example: Google Chart Tools Data Table</title>
+	<style type="text/css">
+body {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+#map-canvas {
+  height: 500px;
+  width: 600px;
+}
+
+#visualization {
+  height: 400px;
+  width: 500px;
+}
+</style>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', { packages: ['table'] });
+      var content_ID = [3];
+	  var content_FN = [3];
+      function drawTable() {
+        var query = "SELECT"+ "'ID' as '代碼'"+ "," +" 'Field_Name' as '飛場'" +
+            'FROM 1rloPccNYfsjqMvlW6tnkCW0Gq6k-QsnAurfMdBU';
+          //var team = "001";
+          //query += " WHERE 'ID' = '" + team + "'";
+      
+        var queryText = encodeURIComponent(query);
+		 
+        var gvizQuery = new google.visualization.Query(
+            'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
+
+        gvizQuery.send(function(response) {
+		  for(var i=0;i<3;i++)
+		  {
+		  content_ID[i]=response.getDataTable().getValue(i,0);
+		  content_FN[i]=response.getDataTable().getValue(i,1);
+		  }
+		  alert(content_ID[2]+content_FN[2])
+          var table = new google.visualization.Table(
+              document.getElementById('visualization'));
+          table.draw(response.getDataTable(), {
+            showRowNumber: true
+          });
+        });
+		//document.addEventListener("deviceready", onDeviceReady, false);
+        var db = window.openDatabase("Field_Inform2", "1.0", "飛場資訊", 1000000);//name, version, display_name, size
+		
+		//function will be called when device ready
+    db.transaction(function (tx) {
+	
+	 tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform2 (ID TEXT NOT NULL, Field_Name TEXT NOT NULL)');
+     for(var ii=0;ii<3;ii++)
+	 {
+	 //tx.executeSql('INSERT INTO Field_Inform2(ID) VALUES ("11")');
+	 var SQL = 'INSERT INTO Field_Inform2(ID,Field_Name) VALUES ("'+content_ID[ii]+'", "'+content_FN[ii]+'")';
+	 tx.executeSql(SQL);
+	 alert(content_ID[ii]+content_FN[ii]);
+	 //tx.executeSql('INSERT INTO Field_Inform2(Field_Name) VALUES ("'+content_FN[ii]+'")');
+	 //alert("1");
+	 }
+	});
+    db.transaction(function (tx) {
+   tx.executeSql('SELECT * FROM Field_Inform2', [], function (tx, results) {
+   //var len = results.rows.length, i;
+   //msg = "<p>Found rows: " + len + "</p>";
+   //	document.querySelector('#MyFavorite').innerHTML +=  msg;
+   for(var iii=0;iii<3;iii++){
+   //alert("1");
+   alert(results.rows.item(iii).Field_Name );
+   }
+ }, null);
+});
+      }
+     google.setOnLoadCallback(drawTable);
+	 
+	 	
+  
+    
+    function queryDB(tx){
+	alert("123");
+        tx.executeSql('SELECT * FROM Field_Inform2', [], querySuccess);
+		
+    }
+ 
+    function querySuccess(tx,result){
+        $('#MyFavorite').empty();
+        $.each(result.rows,function(index){
+            var row = result.rows.item(index);
+            $('#MyFavorite').append('<li><a href="#"><h3 class="ui-li-heading">'+row['Field_Name']+'</h3><p class="ui-li-desc">Club '+row['Field_Lat']+'</p></a></li>');
+        });
+ 
+        $('#MyFavorite').listview();
+    }
+ 
+    </script>
+  </head>
+  <body>
+    <div>
+      <label>Scoring Team:</label>
+      <select id="team" onload="drawTable();">
+        
+      </select>
+    </div>
+    <div id="visualization">	             
+    </div>
+  </body>
+</html>

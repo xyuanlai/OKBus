@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+ <head>
+ <title>Sqllite</title>
+ <style type="text/css">
+body {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+#map-canvas {
+  height: 500px;
+  width: 600px;
+}
+
+#visualization {
+  height: 400px;
+  width: 500px;
+}
+</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	
+	<script>
+
+	
+		
+		//document.addEventListener("deviceready", onDeviceReady, false);
+        var db = window.openDatabase("Field_Inform", "1.0", "飛場資訊", 1000000);//name, version, display_name, size
+		
+		//function will be called when device ready
+    db.transaction(function (tx) {
+	
+	 tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform (id INTEGER PRIMARY KEY AUTOINCREMENT, Field_Name TEXT NOT NULL, Field_Lat DOUBLE NOT NULL , Field_Lon DOUBLE NOT NULL)');
+     tx.executeSql('INSERT INTO Field_Inform(Field_Name,Field_Lat,Field_Lon) VALUES ("淡水", "25.194224","121.43549")');
+	
+	});
+    db.transaction(function (tx) {
+   tx.executeSql('SELECT * FROM Field_Inform', [], function (tx, results) {
+   //var len = results.rows.length, i;
+   //msg = "<p>Found rows: " + len + "</p>";
+   //document.querySelector('#MyFavorite').innerHTML +=  msg;
+   alert(results.rows.item(1).Field_Name );
+ }, null);
+});
+  
+    
+    function queryDB(tx){
+	alert("123");
+        tx.executeSql('SELECT * FROM Field_Inform', [], querySuccess);
+		
+    }
+ 
+    function querySuccess(tx,result){
+        $('#MyFavorite').empty();
+        $.each(result.rows,function(index){
+            var row = result.rows.item(index);
+            $('#MyFavorite').append('<li><a href="#"><h3 class="ui-li-heading">'+row['Field_Name']+'</h3><p class="ui-li-desc">Club '+row['Field_Lat']+'</p></a></li>');
+        });
+ 
+        $('#MyFavorite').listview();
+    }
+ 
+		
+	</script>
+
+
+</head>
+<body>
+
+		<div data-role="page">
+            <div data-role="header" data-position="fixed" data-theme="b">
+            <h1>我的最愛</h1>
+            </div>
+                 <div data-role="content">
+                 <ul id="MyFavorite">
+                 </ul>
+                 </div>
+            </div>
+
+
+
+
+ 
+</body>
+</html>

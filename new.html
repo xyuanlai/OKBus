@@ -1,0 +1,134 @@
+﻿<html>
+ <head>
+ <title>最新消息</title>
+   
+   <meta name="viewport" content="width=device-width, initial-scale=1"> 
+   
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	
+	
+	<script type="text/javascript">
+	
+//	$(document).ready(function() {
+//	$('#YoutubeList ul').children('li').bind('touchstart mousedown', function(e) {
+//     var id = $(this).attr('data-name');
+//	 window.sessionStorage["session"] = id;
+//	});
+//});
+	
+	
+	
+      google.load('visualization', '1', { packages: ['table'] });
+	   //alert("1");
+      var content_ID = [];
+	  var content_FN = [];
+	  
+	  var numRows = 0 ;
+	  var numCols = 0 ;
+	  var count = -1 ;
+	  
+	 function a() {
+	 //alert("1");
+        //var query = "SELECT"+ "'ID' as '代碼'"+ "," +" 'Number' as '網址'" +
+         //    'FROM 1_nHf-CMcAaFApoD0HL5I2lWBwEHbwmwp3IZ3TZU';
+         //var query = "SELECT"+ "'id_FC' as '代碼'"+ "," +" 'name_FC' as '名字'" + "," + "'area_FC' as '地區'" +  "," + "'intro_FC' as '簡介'" +"," + "'weather_FC' as '氣候代碼'" + "," + "'update_FC' as '更新'" +
+         //   'FROM 1ZjyHNefTDemhpw54WFb4_XVw9f74vqUegY7FmFY';
+		 
+		 var query = "SELECT * FROM 1u4m12GJg8jTYRt7_JoiXWYgfPbZc4UaMBLL-xvQ";
+     
+        var queryText = encodeURIComponent(query);
+		 
+        var gvizQuery = new google.visualization.Query(
+            'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
+        		 
+   
+        gvizQuery.send(function(response) {
+		//alert(response.getDataTable().getNumberOfRows());
+		  numRows = response.getDataTable().getNumberOfRows(); 
+            //alert(numRows);	  
+          //numCols = response.getDataTable().getNumberOfColumns(); 
+		  count = numRows ;
+		  //alert(count);
+		  content_ID = [numRows];
+		  content_FN = [numRows];
+		  
+		  for(var i=0;i<numRows;i++)
+		  {
+		  content_ID[i]=response.getDataTable().getValue(i,0);
+		  content_FN[i]=response.getDataTable().getValue(i,1);
+		  //alert(content_FN[i]);
+		  }
+		  //alert(content_ID[2]+content_FN[2]+content_NA[2]);
+		   //alert("2");
+		   b();
+        });
+		//alert(count);
+		
+	/// alert("111");
+	 }
+     google.setOnLoadCallback(a);
+	 
+	 function b()
+		{
+		 //alert(count);
+		for(var nn=0;nn<count;nn++)
+		 {
+		 //alert("2");
+		  ni = document.getElementById('con');
+		  newli = document.createElement('li');
+		  newa = document.createElement('a');
+		 
+            //ni.setAttribute('data-inset','true');
+			//ni.setAttribute('data-role','listview');
+			newli.setAttribute('id','ll');
+			newa.setAttribute('value','456');
+			newa.setAttribute('href',content_FN[nn]);
+			
+			//newa.setAttribute('onClick','c()');
+			newa.setAttribute('rel','external');
+			//newa.setAttribute('data-theme','b');
+			//newa.setAttribute('data-transition','slide');
+			newa.innerHTML = content_ID[nn];
+			//newa.innerHTML = "嗨";
+			ni.appendChild(newli);
+			newli.appendChild(newa);
+			//$('#con').listview('refresh');
+			//alert(content_FN[nn]);
+			//alert(content_ID[nn]);
+			}
+			$('#con').listview('refresh');
+			
+		}
+ 
+    </script>
+
+
+ </head>
+<body>
+ <div data-role="page" id="main">
+    <div data-role="header">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="Main.html" rel="external">首頁</a></li>
+                <li><a href="#">最新商品</a></li>
+                <li><a href="#">登出</a></li>
+            </ul>
+        </div><!-- /navbar -->
+		
+		
+    </div>
+       <div data-role="content" id="YoutubeList">    
+
+			  <ul data-role="listview" data-inset="true" id="con">
+               
+			   </ul>
+
+            </div>   
+	        
+  </div>
+
+</body>
+</html>

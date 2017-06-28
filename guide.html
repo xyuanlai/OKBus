@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>導航</title>
+    <style type="text/css">
+	html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+      }
+
+    #map-canvas, #map_canvas {
+    height: 100%;
+    }
+
+    @media print {
+     html, body {
+     height: auto;
+    }
+
+    #map_canvas {
+    height: 650px;
+    }
+   }
+    </style>
+	    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3&sensor=true"> </script>
+        <script type="text/javascript" src="http://jquery-ui-map.googlecode.com/svn/trunk/ui/min/jquery.ui.map.min.js"></script>
+    <script>
+      var qqqqq = GetUrlVar('sr');
+	  var inside_1,inside_2 ;
+	  var directionDisplay;
+      var directionsService = new google.maps.DirectionsService();
+      var map;
+      var  destination = new google.maps.LatLng(24.1226, 120.6723);//目的地經緯度
+      //navigator.geolocation.getCurrentPosition(initialize);//取得現在經緯度
+	 //var myposition = new google.maps.LatLng(24.15208,120.68483); 
+	 navigator.geolocation.getCurrentPosition(initialize);//取得現在經緯度
+	 navigator.geolocation.getCurrentPosition(calcRoute);
+	function a() 
+	{ 
+	 var db = window.openDatabase("Field_Inform21", "1.0", "飛場資訊", 1000000);
+		 db.transaction(function (tx) {
+		 
+		 //tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform21 (id_FC TEXT NOT NULL, locate_latN TEXT NOT NULL, locate_latE TEXT NOT NULL, locate_latW TEXT NOT NULL, locate_latS TEXT NOT NULL, locate_lonN TEXT NOT NULL, locate_lonE TEXT NOT NULL, locate_lonW TEXT NOT NULL, locate_lonS TEXT NOT NULL, entrance_latA TEXT NOT NULL, entrance_lonA TEXT NOT NULL, entrance_latB TEXT NOT NULL, entrance_lonB TEXT NOT NULL)');
+         tx.executeSql('SELECT * FROM Field_Inform21 WHERE id_FC=='+qqqqq, [], function (tx, results) {
+            
+			inside_1=results.rows.item(0).entrance_latA ;
+			inside_2=results.rows.item(0).entrance_lonA ;
+			
+			//number_a = ( Number(a_a)+ Number(c_a))/2 ;
+			//number_b = (Double.parseDouble(a_b)+Double.parseDouble(c_b))/2 ;
+			//alert(number_a);
+			destination = new google.maps.LatLng(inside_1,inside_2);
+             //alert(results.rows.item(0).entrance_latA);
+			 initialize();
+			 
+             }, null);
+			  
+		 
+		 }
+	 
+	 }
+	 function GetUrlVar(VarName)
+{
+name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+var regexS = "[\\?&]" + VarName + "=([^&#]*)";
+var regex = new RegExp(regexS);
+var results = regex.exec(window.location.href);
+if (results == null)
+  return "999";
+else
+  return results[1];
+}
+	 
+      function initialize(position) {
+	    
+		var lat = position.coords.latitude ;
+        var lon = position.coords.longitude ;
+		
+		alert(lat+" "+lon);
+		
+		var Current_Position = new google.maps.LatLng(lat, lon);
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var mapOptions = {
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          center: Current_Position
+        }
+        map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+        directionsDisplay.setMap(map);
+		 directionsDisplay.setPanel(document.getElementById("directionsPanel"));
+         calcRoute();
+		 
+      }
+
+      function calcRoute(position) {
+	 
+	    var lat = position.coords.latitude ;
+        var lon = position.coords.longitude ;
+		
+		var Current_Position = new google.maps.LatLng(lat, lon);
+		myposition = Current_Position;
+		alert("ok");
+        var selectedMode = document.getElementById('mode').value;
+		
+        var request = {
+            origin: myposition,
+            destination: destination,
+            // Note that Javascript allows us to access the constant
+            // using square brackets and a string value as its
+            // "property."
+            travelMode: google.maps.TravelMode[selectedMode]
+        };
+		 
+        directionsService.route(request, function(response, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+          }
+        });
+		
+      }
+	 
+    </script>
+  </head>
+  <body onload="a()">
+  
+  
+   <div id="basic-map" data-role="page">
+            <div data-role="header">
+                <h1>Tim</h1>
+                <a data-rel="back">Back</a>
+				 <div data-role="navbar">
+            
+        </div><!-- /navbar -->
+            </div>
+            <div data-role="content">   
+                <div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
+                    <div id="map_canvas" style="height:250px;"></div>
+					<div id="directionsPanel" style="float:down;width:50%;height 50%"></div>
+                </div>
+				  <select id="mode" onchange="calcRoute();">
+      <option value="DRIVING">Driving</option>
+      <option value="WALKING">Walking</option>
+      <option value="BICYCLING">Bicycling</option>
+      <option value="TRANSIT">Transit</option>
+    </select>
+            </div>
+        </div> 
+  
+  
+  
+    
+  </body>
+</html>

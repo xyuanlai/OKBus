@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 0px; padding: 0px }
+  #map_canvas { height: 100% }
+</style>
+<script type="text/javascript"
+    src="https://maps.google.com/maps/api/js?sensor=true"> //呼叫google map api
+</script>
+<script type="text/javascript">
+
+  navigator.geolocation.getCurrentPosition( initialize, errorCallback ); //開始定位
+        //把飛場經緯度+名稱存到陣列中
+        var Fly_Field_Name = ['台中市大里市國光路橋','臺中市后里資源回收廠', '台中東勢河濱公園','台中嶺東大學後山','台中港'];
+		
+	    var Fly_Field_Lat = [24.116714, 24.288044, 24.258018, 24.135553,24.259172];
+		
+	    var Fly_Field_Lon= [120.67952,120.69829,120.824332,120.603361,120.518303];
+  
+        if ( navigator.geolocation ) { 
+		
+         } else { 
+           alert( "你的瀏覽器不支援 geolocation!!" ); //判斷是否支援navigator
+            } 
+  
+  
+  function initialize(position) { //初始化我當前地圖並Mark起來
+    var lat = position.coords.latitude ;
+    var lon = position.coords.longitude ;
+    var latlng = new google.maps.LatLng(lat, lon);
+    var myOptions = {
+      zoom: 14,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+	  //MapTypeId後面可以放的參數
+	  //ROADMAP 顯示 Google 地圖的正常、預設 2D 地圖方塊。
+      //SATELLITE 顯示圖形地圖方塊。
+      //HYBRID 會顯示圖形地圖方塊和特殊圖徵 (道路、城市名稱) 地圖方塊圖層的混合圖。
+      //TERRAIN 會顯示實際起伏的地圖方塊，以展現地形高度和水域圖徵 (山嶽、河流等)。
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+  
+   var marker = new google.maps.Marker({
+      map:map,
+      draggable:true,
+      animation: google.maps.Animation.DROP,
+	  title: "現在位置",
+      position: latlng,
+	 
+  });
+  
+  
+   for (var i=0 ; i <  Fly_Field_Name.length ; i++)
+	       {
+	       
+	        latlng = new google.maps.LatLng(Fly_Field_Lat[i],Fly_Field_Lon[i]);
+			var marker = new google.maps.Marker({
+            map:map,
+            draggable:true,
+            animation: google.maps.Animation.DROP,
+	        title: Fly_Field_Name[i],
+            position: latlng,
+        }); 
+		    
+			}
+}
+
+  
+	
+   
+   
+</script>
+</head>
+<body onload="initialize()">
+  <div id="map_canvas" style="width:100%; height:100%"></div>
+  <input type="button" value="Show" onclick="Show_Fly_Field()">
+  <input type="button" value="Show1" onclick="Show_Fly_Field1()">
+  
+  <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<rss version="2.0" xmlns:yweather="http://xml.weather.yahoo.com/ns/rss/1.0" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
+<channel>
+  <title>Yahoo! Weather Taipei</title>
+  
+</body>
+</html>
