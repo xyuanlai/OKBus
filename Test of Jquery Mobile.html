@@ -2,22 +2,22 @@
 <html>
  <head>
  <title>This is for Jquery-mobile test</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
-	
-	
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./jquery.mobile-1.1.0.min.css" />
+  	<script src="./jquery-1.8.2.min.js"></script>
+  	<script src="./jquery.mobile-1.1.0.min.js"></script>
+
+
 	<script >
-	
-		
+
+
 		$(document).bind('mobileinit', function(){
-			$.event.special.swipe.horizontalDistanceThreshold = 100; 
-			$.event.special.swipe.verticalDistanceThreshold = 120; 
+			$.event.special.swipe.horizontalDistanceThreshold = 100;
+			$.event.special.swipe.verticalDistanceThreshold = 120;
 		});
 		var tit = [];
 		var id_use = [] ;
-		
+
 		 var count = 0 ;
 		 var ni;
 		var newli;
@@ -25,8 +25,8 @@
 		var loc ;
 		function north()
 		{
-	
-					
+
+
 		 var db = window.openDatabase("Field_Inform58", "1.0", "飛場資訊", 1000000);
 		 db.transaction(function (tx) {
 		 //tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform58 (id_FC TEXT NOT NULL, name_FC TEXT NOT NULL, area_FC TEXT NOT NULL, intro_FC TEXT NOT NULL, weather_FC TEXT NOT NULL, update_FC TEXT NOT NULL)');
@@ -49,18 +49,18 @@
             }
              b() ;
              }, null);
-			  
-		
+
+
 		 });
-		 
+
 		//b() ;
 		  count=0 ;
-		
-		
+
+
 		}
 		function tao()
 		{
-		 
+
 		 var db = window.openDatabase("Field_Inform58", "1.0", "飛場資訊", 1000000);
 		 db.transaction(function (tx) {
 		 //tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform58 (id_FC TEXT NOT NULL, name_FC TEXT NOT NULL, area_FC TEXT NOT NULL, intro_FC TEXT NOT NULL, weather_FC TEXT NOT NULL, update_FC TEXT NOT NULL)');
@@ -83,20 +83,20 @@
             }
              b() ;
              }, null);
-			 
-				 
-		
+
+
+
 		 });
-		 
+
 		//b() ;
-		  
+
 		//$('#searc').listview('refresh');
 		count=0 ;
-		
+
 		}
 		function chu()
 		{
-		 
+
 		 var db = window.openDatabase("Field_Inform58", "1.0", "飛場資訊", 1000000);
 		 db.transaction(function (tx) {
 		 //tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform58 (id_FC TEXT NOT NULL, name_FC TEXT NOT NULL, area_FC TEXT NOT NULL, intro_FC TEXT NOT NULL, weather_FC TEXT NOT NULL, update_FC TEXT NOT NULL)');
@@ -119,20 +119,20 @@
             }
              b() ;
              }, null);
-			 
-				 
-		
+
+
+
 		 });
-		 
+
 		//b() ;
-		  
+
 		//$('#searc').listview('refresh');
 		count=0 ;
-		
+
 		}
 		function yu()
 		{
-		 
+
 		 var db = window.openDatabase("Field_Inform58", "1.0", "飛場資訊", 1000000);
 		 db.transaction(function (tx) {
 		 //tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform58 (id_FC TEXT NOT NULL, name_FC TEXT NOT NULL, area_FC TEXT NOT NULL, intro_FC TEXT NOT NULL, weather_FC TEXT NOT NULL, update_FC TEXT NOT NULL)');
@@ -155,20 +155,20 @@
             }
              b() ;
              }, null);
-			 
-				 
-		
+
+
+
 		 });
 		 count=0 ;
 		//b() ;
-		  
+
 		//$('#searc').listview('refresh');
-		
-		
+
+
 		}
 		function kao()
 		{
-		 
+
 		 var db = window.openDatabase("Field_Inform58", "1.0", "飛場資訊", 1000000);
 		 db.transaction(function (tx) {
 		 //tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform58 (id_FC TEXT NOT NULL, name_FC TEXT NOT NULL, area_FC TEXT NOT NULL, intro_FC TEXT NOT NULL, weather_FC TEXT NOT NULL, update_FC TEXT NOT NULL)');
@@ -191,20 +191,20 @@
             }
              b() ;
              }, null);
-			 
-				 
-		
+
+
+
 		 });
-		 
+
 		//b() ;
-		  
+
 		//$('#searc').listview('refresh');
 		count=0 ;
-		
+
 		}
 		function yi()
 		{
-		 
+
 		 var db = window.openDatabase("Field_Inform58", "1.0", "飛場資訊", 1000000);
 		 db.transaction(function (tx) {
 		 //tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform58 (id_FC TEXT NOT NULL, name_FC TEXT NOT NULL, area_FC TEXT NOT NULL, intro_FC TEXT NOT NULL, weather_FC TEXT NOT NULL, update_FC TEXT NOT NULL)');
@@ -227,16 +227,16 @@
             }
              b() ;
              }, null);
-			 
-				 
-		
+
+
+
 		 });
 		 count=0 ;
 		//b() ;
-		  
+
 		//$('#searc').listview('refresh');
-		
-		
+
+
 		}
 		function back()
 		{
@@ -257,45 +257,45 @@
 		  //newli.children().remove('a');
 		  //ni.empty();
 		  //alert("Q");
-		  
+
 		  //ni.empty();
 		  $('#con').listview('refresh');
-		  
+
 		}
-		
+
 		function b()
 		{
 		//alert(ni);
 		for(var nn=0;nn<count;nn++)
 		 {
 		 //alert(tit[nn]);
-		 
+
 		  ni = document.getElementById('con');
 		  newli = document.createElement('li');
 		  newa = document.createElement('a');
-		  
+
 		 // $('con').html(' <li><a href="#North_Info" onClick="tao()" data-transition="slide" data-theme="b">桃竹苗</a></li>');
 		 //ni.html('<li id="ll"><a value="456" href="Danshui01.html"'+'?sr='+id_use[nn]+'&name='+tit[nn]+' rel="external">'+tit[nn]+'</a></li>');
-            
+
 			newli.setAttribute('id','ll');
 			newa.setAttribute('value','456');
 			newa.setAttribute('href','Danshui01.html'+'?sr='+id_use[nn]+'&name='+tit[nn]+'&loc='+loc);
-			
-			
+
+
 			newa.setAttribute('rel','external');
-			
+
 			newa.innerHTML = tit[nn];
-			
+
 			ni.appendChild(newli);
 			newli.appendChild(newa);
-			
+
 			}
 			$('#con').listview('refresh');
 		}
-		
-		
 
-		
+
+
+
 	</script>
 
 
@@ -310,11 +310,11 @@
                 <li><a href="#">登出</a></li>
             </ul>
         </div><!-- /navbar -->
-		
+
     </div>
-          
-	        <div data-role="content">    
-	 
+
+	        <div data-role="content">
+
                <ul data-role="listview" data-inset="true" >
 	            <li><a href="#North_Info" onClick="north()" id="North" data-transition="slide" data-theme="b">北北基</a></li>
 	            <li><a href="#North_Info" onClick="tao()" data-transition="slide" data-theme="b">桃竹苗</a></li>
@@ -322,13 +322,13 @@
 	            <li><a href="#North_Info" onClick="yu()" data-transition="slide" data-theme="b">雲嘉南</a></li>
 				<li><a href="#North_Info" onClick="kao()" data-transition="slide" data-theme="b">高屏</a></li>
 				<li><a href="#North_Info" onClick="yi()" data-transition="slide" data-theme="b">宜花東</a></li>
-				
+
                </ul>
 
             </div>
   </div>
-  
-  
+
+
 		<div data-role="page" id="North_Info">
 
             <div data-role="header">
@@ -339,30 +339,30 @@
                 <li><a href="#">登出</a></li>
             </ul>
         </div><!-- /navbar -->
-		
+
           </div>
-		  
-           <div data-role="content"> 
+
+           <div data-role="content">
            <input type="search" name="search" id="searc" value="" />
-           
+
 		   <ul data-role="listview" id="con" data-inset="true" >
-	       
-	       
+
+
            </ul>
-		 
+
 	       </div>
-		   
+
 		   <div data-role="footer">
            <h2><a href="#main" style="text-decoration: none; " id="tohome" data-theme="b" data-transition="slide" data-direction="reverse" data-rel="back" onClick="back()">上一頁</a></h2>
            </div>
 
         </div>
-		
-		<div data-role="page" id="locate">	
 
-		
+		<div data-role="page" id="locate">
 
 
- 
+
+
+
 </body>
 </html>
