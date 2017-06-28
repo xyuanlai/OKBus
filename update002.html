@@ -19,8 +19,9 @@
     <meta charset="UTF-8">
 
     <title>Fusion Tables API Example: Google Chart Tools Data Table</title>
-    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+    <link rel="stylesheet" href="./jquery.mobile-1.1.0.min.css" />
+  	<script src="./jquery-1.8.2.min.js"></script>
+  	<script src="./jquery.mobile-1.1.0.min.js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load('visualization', '1', { packages: ['table'] });
@@ -45,16 +46,16 @@
 	 //alert("1");
         var query = "SELECT"+ "'id_FC' as '代碼'"+ "," +" 'locate_latN' as 'locate_latN'" + "," + "'locate_latE' as 'locate_latE'" +  "," + "'locate_latW' as 'locate_latW'" +"," + "'locate_latS' as 'locate_latS'" + "," + "'locate_lonN' as 'locate_lonN'" +
              "," + "'locate_lonE' as 'locate_lonE'" + "," + "'locate_lonW' as 'locate_lonW'" + "," + "'locate_lonS' as 'locate_lonS'" + "," + "'entrance_latA' as 'entrance_latA'" + "," + "'entrance_lonA' as 'entrance_lonA'" + "," + "'entrance_latB' as 'entrance_latB'" + "," + "'entrance_lonB' as 'entrance_lonB'" +'FROM 1UwqxMMnYqauNflEG0ij8s11anySJd-FxH5l0g1k';
-     
+
         var queryText = encodeURIComponent(query);
-		 
+
         var gvizQuery = new google.visualization.Query(
             'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
-        		 
-   
+
+
         gvizQuery.send(function(response) {
-		  numRows = response.getDataTable().getNumberOfRows();  
-          numCols = response.getDataTable().getNumberOfColumns(); 
+		  numRows = response.getDataTable().getNumberOfRows();
+          numCols = response.getDataTable().getNumberOfColumns();
 		  content_ID = [numRows];
 		  a_a = [numRows];
 	      a_b = [numRows];
@@ -90,10 +91,10 @@
 		   //alert("2");
 	 var db = window.openDatabase("Field_Inform21", "1.0", "飛場資訊", 1000000);
 	    db.transaction(function (tx) {
-	
+
 	 tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform21 (id_FC TEXT NOT NULL, locate_latN TEXT NOT NULL, locate_latE TEXT NOT NULL, locate_latW TEXT NOT NULL, locate_latS TEXT NOT NULL, locate_lonN TEXT NOT NULL, locate_lonE TEXT NOT NULL, locate_lonW TEXT NOT NULL, locate_lonS TEXT NOT NULL, entrance_latA TEXT NOT NULL, entrance_lonA TEXT NOT NULL, entrance_latB TEXT NOT NULL, entrance_lonB TEXT NOT NULL)');
      //alert(content_ID[2]+content_FN[2]+content_NA[2]+"1");
-	 
+
 	 tx.executeSql(
                     'SELECT id_FC FROM Field_Inform21',[],function(tx, rs) {
 					//alert("000");
@@ -101,7 +102,7 @@
 					//alert(rs.rows.length);
 					//alert(count);
 					//alert(numRows);
-					
+
 					for(var iii=count;iii<=numRows-1;iii++)
 	 {
 	 //alert("456");
@@ -136,11 +137,11 @@
 	});
         });
 	 //alert("111");
-	 
+
 	 }
      google.setOnLoadCallback(a);
- 
- 
+
+
   function file_load()
 	{
 	// window.location="Main.html";
@@ -150,9 +151,9 @@
   </head>
   <body>
     <div>
-      
+
     </div>
-    <div id="visualization">	             
+    <div id="visualization">
     </div>
   </body>
 </html>

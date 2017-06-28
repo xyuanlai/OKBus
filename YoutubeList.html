@@ -2,20 +2,20 @@
  <html>
 
  <head>
- <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="./jquery.mobile-1.1.0.min.css" />
+ <script src="./jquery-1.8.2.min.js"></script>
+ <script src="./jquery.mobile-1.1.0.min.js"></script>
 
-  
- 
+
+
 <script type="text/javascript">
 
 	var YoutubeID = sessionStorage.session;
 	var URL = "https://gdata.youtube.com/feeds/api/users/"+YoutubeID+"/uploads?v=2&max-results=25&start-index=1&fields=entry(title),entry(published),entry(media:group(yt:videoid))&alt=json&callback=?";
 	//var URL = "https://gdata.youtube.com/feeds/api/users/Mrrcscaleguy/uploads?v=2&max-results=25&start-index=1&fields=entry(title),entry(published),entry(media:group(yt:videoid))&alt=json&callback=?";
     $(document).ready(function() {
-		$.getJSON(URL, function(data) { 
+		$.getJSON(URL, function(data) {
         $.each(data.feed.entry, function(i, item) {
             // var updated = item.updated;
              //var url = item['media$group']['media$content'][0]['url'];
@@ -23,7 +23,7 @@
 			 //alert("123");
 			//alert(cc);
 			var published_time = item['published']['$t'];
-			var video_id = item['media$group']['yt$videoid']['$t'];   //media$group.yt$videoid.$t 
+			var video_id = item['media$group']['yt$videoid']['$t'];   //media$group.yt$videoid.$t
             var video_title = item['title']['$t'];
 			var video_img = "http://img.youtube.com/vi/"+ item['media$group']['yt$videoid']['$t'] +"/default.jpg";
              //var numViews = item['yt$statistics']['viewCount'];
@@ -32,27 +32,27 @@
  //$('#feed_container').append('<div class="thumb"><a href="javascript:void(0);" data-link="' + url + '">' + media_title + '</a></div>');
              //alert();
 			 //之後加Youtube的名字進來
-             $("#list").append("<li><a href='http://www.youtube.com/watch?v="+video_id+"'>"+"<img src = '"+video_img+"'/>"+video_title+"<p></p>"+"<p>"+published_time.substr(0,9)+"</p></a></li>");  
+             $("#list").append("<li><a href='http://www.youtube.com/watch?v="+video_id+"'>"+"<img src = '"+video_img+"'/>"+video_title+"<p></p>"+"<p>"+published_time.substr(0,9)+"</p></a></li>");
 			 $("#list").listview('refresh');
          });
     });
     });
 </script>
-	
+
 	</head>
-	
+
 	<body>
-	
-		<div data-role="content">  
-		
+
+		<div data-role="content">
+
 			<div data-role="footer">
 			<h2><a href="YoutubeChannel.html"  style="text-decoration: none; "  id="back" data-theme="b" data-transition="slide" data-direction="reverse" data-rel="back">上一頁</a></h2>
 			</div>
-			
-			<ul data-role="listview" id="list" data-inset="true"></ul> 
+
+			<ul data-role="listview" id="list" data-inset="true"></ul>
 
         </div>
 
     </body>
-	
+
 </html>

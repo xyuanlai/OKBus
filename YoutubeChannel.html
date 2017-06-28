@@ -2,23 +2,23 @@
 <html>
  <head>
  <title>Youtube_Channel</title>
-   
-   <meta name="viewport" content="width=device-width, initial-scale=1"> 
-   
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-	<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
-	
-	
+
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="stylesheet" href="./jquery.mobile-1.1.0.min.css" />
+ 	<script src="./jquery-1.8.2.min.js"></script>
+ 	<script src="./jquery.mobile-1.1.0.min.js"></script>
+
+
 	<script>
-	
+
 	$(document).ready(function() {
 	$('#YoutubeList ul').children('li').bind('touchstart mousedown', function(e) {
      var id = $(this).attr('data-name');
 	 window.sessionStorage["session"] = id;
 	});
 });
-	
+
 	</script>
 
 
@@ -33,13 +33,13 @@
                 <li><a href="#">登出</a></li>
             </ul>
         </div><!-- /navbar -->
-		
+
     </div>
-          
-	        <div data-role="content" id="YoutubeList">    
-			
+
+	        <div data-role="content" id="YoutubeList">
+
 			  <img src="youtube.jpg" id ="cc" width="100%"/>
-			  
+
 			  <ul data-role="listview" data-inset="true" >
                 <li data-name="Mrrcscaleguy"><a href="YoutubeList.html" rel="external" data-transition="pop" data-theme="b">Jeff Fassbinder的頻道</a></li>
                 <li data-name="colinbell321" ><a href="YoutubeList.html" rel="external" data-transition="pop" data-theme="b">Colin Bell的頻道</a></li>

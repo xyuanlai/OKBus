@@ -2,11 +2,12 @@
 <html>
    <head>
         <title></title>
-		<meta name="viewport" content="width=device-width, initial-scale=1"> 
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
         <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyB_7kzh0BucLAkSZECBRy6sEJKi3udAgAk" type="text/javascript"></script>
-		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+        <link rel="stylesheet" href="./jquery.mobile-1.1.0.min.css" />
+      	<script src="./jquery-1.8.2.min.js"></script>
+      	<script src="./jquery.mobile-1.1.0.min.js"></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3&sensor=true"> </script>
         <script type="text/javascript" src="http://jquery-ui-map.googlecode.com/svn/trunk/ui/min/jquery.ui.map.min.js"></script>
         <script type="text/javascript">
@@ -17,19 +18,19 @@
 			//var inside1 = new google.maps.LatLng(inside1_1,inside1_2);
 			//var inside = new google.maps.LatLng(inside_1,inside_2);
             mobileDemo = { 'center': '25.146032,121.801076', 'zoom': 15 };
-			
+
 			var qqqqq = GetUrlVar('sr');
 			var name_title = GetUrlVar('name');
 			var bac = GetUrlVar('loc');
 			var count = 0 ;
 			var tit = [];
 		var id_use = [] ;
-			
+
 			//var ni = document.getElementById('title_set');
 			//var newli = document.createElement('h1');
             //newli.innerHTML = name_title;
 			//ni.appendChild(newli);
- 
+
 /// 取得網址裡的參數值
 function GetUrlVar(VarName)
 {
@@ -42,13 +43,13 @@ if (results == null)
 else
   return results[1];
 }
-			
-  
+
+
 
             function initialize() {
-               document.getElementById('title_set').innerHTML = decodeURI(name_title);  
-          
-			
+               document.getElementById('title_set').innerHTML = decodeURI(name_title);
+
+
             var mapOptions = {
               zoom: 18,
               center: danshui,
@@ -70,7 +71,7 @@ else
             marker.setMap(map);
 			marker1.setMap(map);
             var triangleCoords = [
-			
+
             new google.maps.LatLng(a_a,a_b),
             new google.maps.LatLng(b_a,b_b),
             new google.maps.LatLng(c_a,c_b),
@@ -86,24 +87,24 @@ else
             fillColor: '#FF0000',
             fillOpacity: 0.35
                                                      });
-	        
-			
-			bermudaTriangle.setMap(map);	
 
-              
-               gu  = document.getElementById('gui');	
-               gu.setAttribute('href','guide.html'+'?sr='+qqqqq);	
+
+			bermudaTriangle.setMap(map);
+
+
+               gu  = document.getElementById('gui');
+               gu.setAttribute('href','guide.html'+'?sr='+qqqqq);
 			   gu.setAttribute('rel','external');
 			   //javascript:document.getElementById('guii').location.reload();
 			   //$("#guii").load();
 			   //document.getElementById('guii').location.reload();
 			   $("#gui").button('refresh');
-               alert(gu.href);			   
+               alert(gu.href);
             }
             $(document).on("pageinit", "#basic-map", function() {
 			var db = window.openDatabase("Field_Inform21", "1.0", "飛場資訊", 1000000);
 		 db.transaction(function (tx) {
-		 
+
 		 //tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform21 (id_FC TEXT NOT NULL, locate_latN TEXT NOT NULL, locate_latE TEXT NOT NULL, locate_latW TEXT NOT NULL, locate_latS TEXT NOT NULL, locate_lonN TEXT NOT NULL, locate_lonE TEXT NOT NULL, locate_lonW TEXT NOT NULL, locate_lonS TEXT NOT NULL, entrance_latA TEXT NOT NULL, entrance_lonA TEXT NOT NULL, entrance_latB TEXT NOT NULL, entrance_lonB TEXT NOT NULL)');
          tx.executeSql('SELECT * FROM Field_Inform21 WHERE id_FC=='+qqqqq, [], function (tx, results) {
             a_a=results.rows.item(0).locate_latN ;
@@ -125,18 +126,18 @@ else
              //alert(results.rows.item(0).entrance_latA);
 			 initialize();
              }, null);
-			  
-		 
+
+
 		 }
 		 );
-		
-               
+
+
             });
-            
+
 			$(document).ready(function() {
 			$("#button2").toggle(function(){
-			
-             
+
+
             var mapOptions = {
               zoom: 18,
               center: danshui,
@@ -173,11 +174,11 @@ else
             fillColor: '#FF0000',
             fillOpacity: 0.35
                                                      });
-	        
-			
-			bermudaTriangle.setMap(map);			
-			
-			
+
+
+			bermudaTriangle.setMap(map);
+
+
 			document.getElementById("button2").value = "一般地圖";
 			$('[type="button"]').button('refresh');
 			},function(){
@@ -217,27 +218,27 @@ else
             fillColor: '#FF0000',
             fillOpacity: 0.35
                                                      });
-	        
-			
-			bermudaTriangle.setMap(map);			
+
+
+			bermudaTriangle.setMap(map);
             document.getElementById("button2").value = "空照圖";
-			$('[type="button"]').button('refresh'); 
-			
-         		   
-			
+			$('[type="button"]').button('refresh');
+
+
+
 			});
 			});
 
 			function favorite()
 			{
-			 
+
 	 var db = window.openDatabase("Field_Inform58", "1.0", "飛場資訊", 1000000);
 	    db.transaction(function (tx) {
-	
-	  
-	 
+
+
+
 	  tx.executeSql('SELECT * FROM Field_Inform58 WHERE id_FC=='+qqqqq, [], function (tx, results) {
-          
+
 	 {
 	 //alert("456");
 	 var SQLL = 'UPDATE Field_Inform58 SET favorite=1 where id_FC=='+qqqqq;
@@ -246,17 +247,17 @@ else
 	 }
 		}
             );
-			  });  
+			  });
 			  }
             function ba()
 			{
-			
-		
-		 
+
+
+
 			 var db = window.openDatabase("Field_Inform58", "1.0", "飛場資訊", 1000000);
 		     db.transaction(function (tx) {
 		  //tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform58 (id_FC TEXT NOT NULL, name_FC TEXT NOT NULL, area_FC TEXT NOT NULL, intro_FC TEXT NOT NULL, weather_FC TEXT NOT NULL, update_FC TEXT NOT NULL)');
-         
+
 		 tx.executeSql('SELECT * FROM Field_Inform58', [], function (tx, results) {
             tit = [results.rows.length] ;
 			id_use = [results.rows.length] ;
@@ -275,9 +276,9 @@ else
             }
              b() ;
              }, null);
-			 
-				 
-		
+
+
+
 		 });
 		 count=0 ;
 			}
@@ -300,12 +301,12 @@ else
 		  //newli.children().remove('a');
 		  //ni.empty();
 		  //alert("Q");
-		  
+
 		  //ni.empty();
 		  $('#con').listview('refresh');
-		  
+
 		}
-		
+
                function b()
 		{
 		 var ni;
@@ -315,31 +316,31 @@ else
 		for(var nn=0;nn<count;nn++)
 		 {
 		 //alert(tit[nn]);
-		 
+
 		  ni = document.getElementById('con');
 		  newli = document.createElement('li');
 		  newa = document.createElement('a');
-		  
+
 		 // $('con').html(' <li><a href="#North_Info" onClick="tao()" data-transition="slide" data-theme="b">桃竹苗</a></li>');
 		 //ni.html('<li id="ll"><a value="456" href="Danshui01.html"'+'?sr='+id_use[nn]+'&name='+tit[nn]+' rel="external">'+tit[nn]+'</a></li>');
-            
+
 			newli.setAttribute('id','ll');
 			newa.setAttribute('value','456');
 			newa.setAttribute('href','Danshui01.html'+'?sr='+id_use[nn]+'&name='+tit[nn]+'&loc='+bac);
-			
-			
+
+
 			newa.setAttribute('rel','external');
-			
+
 			newa.innerHTML = tit[nn];
-			
+
 			ni.appendChild(newli);
 			newli.appendChild(newa);
-			
+
 			}
 			$('#con').listview('refresh');
 		}
-            
-			
+
+
         </script>
     </head>
     <body>
@@ -354,14 +355,14 @@ else
             </ul>
         </div><!-- /navbar -->
             </div>
-            <div data-role="content" id="guii">   
+            <div data-role="content" id="guii">
                 <div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
                     <div id="map_canvas" style="height:170px;"></div>
                 </div>
 				<input type="button" value="導航" id="gui" >
 				<input type="button" value="空照圖"  id="button2">
             </div>
-        </div>    
+        </div>
 <div data-role="page" id="North_Info">
 
             <div data-role="header">
@@ -372,23 +373,23 @@ else
                 <li><a href="#">登出</a></li>
             </ul>
         </div><!-- /navbar -->
-		
+
           </div>
-		  
-           <div data-role="content"> 
+
+           <div data-role="content">
            <input type="search" name="search" id="searc" value="" />
-           
+
 		   <ul data-role="listview" id="con" data-inset="true" >
-	       
-	       
+
+
            </ul>
-		 
+
 	       </div>
-		   
+
 		   <div data-role="footer">
            <h2><a href="Test of Jquery Mobile.html" style="text-decoration: none; "  data-theme="b" data-transition="slide" data-direction="reverse"  data-rel="button" rel="external" onClick="back()">上一頁</a></h2>
 		   </div>
 
-        </div>		
+        </div>
     </body>
 </html>

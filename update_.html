@@ -19,8 +19,9 @@
     <meta charset="UTF-8">
 
     <title>Fusion Tables API Example: Google Chart Tools Data Table</title>
-    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+    <link rel="stylesheet" href="./jquery.mobile-1.1.0.min.css" />
+  	<script src="./jquery-1.8.2.min.js"></script>
+  	<script src="./jquery.mobile-1.1.0.min.js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load('visualization', '1', { packages: ['table'] });
@@ -35,16 +36,16 @@
 	 //alert("1");
         var query = "SELECT"+ "'ID_news' as '代碼'"+ "," +" 'img_url' as '圖號'" + "," + "'name_img' as '圖名'" +  "," + "'img_update' as '更新'" +
             'FROM 1YNfzPGkBmKAmjS84ptJbZ5JDPJYvzkYm3yin3-A';
-     
+
         var queryText = encodeURIComponent(query);
-		 
+
         var gvizQuery = new google.visualization.Query(
             'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
-        		 
-   
+
+
         gvizQuery.send(function(response) {
-		  numRows = response.getDataTable().getNumberOfRows();  
-          numCols = response.getDataTable().getNumberOfColumns(); 
+		  numRows = response.getDataTable().getNumberOfRows();
+          numCols = response.getDataTable().getNumberOfColumns();
 		  content_ID = [numRows] ;
 		  content_FN = [numRows] ;
 		  content_NA = [numRows] ;
@@ -61,10 +62,10 @@
 	 var db = window.openDatabase("Field_Inform59", "1.0", "飛場資訊", 1000000);
 
 	    db.transaction(function (tx) {
-	
+
 	 tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform59 (ID_news INT, img_url VARCHAR, name_img VARCHAR, img_update INT)');
      //alert(content_ID[2]+content_FN[2]+content_NA[2]+"1");
-	 
+
 	 tx.executeSql(
                     'SELECT ID_news FROM Field_Inform59',[],function(tx, rs) {
 					//alert("000");
@@ -72,7 +73,7 @@
 					//alert(rs.rows.length);
 					//alert(count);
 					//alert(numRows);
-					
+
 					for(var iii=count;iii<=numRows-1;iii++)
 	 {
 	 //alert("456");
@@ -110,14 +111,14 @@
 	 //alert("111");
 	 }
      google.setOnLoadCallback(a);
- 
+
     </script>
   </head>
   <body>
     <div>
-      
+
     </div>
-    <div id="visualization">	             
+    <div id="visualization">
     </div>
   </body>
 </html>

@@ -2,11 +2,11 @@
 <html>
  <head>
  <title>This is for Jquery-mobile test</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+  <link rel="stylesheet" href="./jquery.mobile-1.1.0.min.css" />
+	<script src="./jquery-1.8.2.min.js"></script>
+	<script src="./jquery.mobile-1.1.0.min.js"></script>
 	<script>
 		var tit = [];
 		var id_use = [] ;
@@ -14,8 +14,8 @@
 		var newli ;
 		var newa ;
 		 var count = 0 ;
-		
-		
+
+
 		 var db = window.openDatabase("Field_Inform58", "1.0", "飛場資訊", 1000000);
 		 db.transaction(function (tx) {
 		  //alert("12");
@@ -33,22 +33,22 @@
 			 id_use[count] = results.rows.item(i).id_FC ;
 			 //alert(tit[count]);
 			 count++ ;
-			  
+
 			 //alert(count+"0");
-			
+
             //alert(results.rows.item(i).id_FC );
             }
              b();
              }, null);
-			  
-		
+
+
 		 });
-		 
+
 		//b() ;
-		  
-		
-		
-		
+
+
+
+
 	function b()
 		{
 		 //alert(count);
@@ -58,13 +58,13 @@
 		  ni = document.getElementById('con');
 		  newli = document.createElement('li');
 		  newa = document.createElement('a');
-		 
+
             //ni.setAttribute('data-inset','true');
 			//ni.setAttribute('data-role','listview');
 			newli.setAttribute('id','ll');
 			newa.setAttribute('value','456');
 			newa.setAttribute('href','Danshui01.html'+'?sr='+id_use[nn]+'&name='+tit[nn]);
-			
+
 			//newa.setAttribute('onClick','c()');
 			newa.setAttribute('rel','external');
 			//newa.setAttribute('data-theme','b');
@@ -89,36 +89,36 @@
                 <li><a href="#">登出</a></li>
             </ul>
         </div><!-- /navbar -->
-		
+
     </div>
-          
-	      <div data-role="content"> 
+
+	      <div data-role="content">
            <input type="search" name="search" id="searc" value="" />
            <ul data-role="listview" id="con" data-inset="true" >
-	       
-	       
+
+
            </ul>
 	       </div>
-		   
+
 		   <div data-role="footer">
            <h2><a href="#main" style="text-decoration: none; " id="tohome" data-theme="b" data-transition="slide" data-direction="reverse" data-rel="back">上一頁</a></h2>
-           </div>  
+           </div>
   </div>
-  
-  
-	
-
-            
-		  
-          
-
-       
-		
-		<div data-role="page" id="locate">	
-
-		
 
 
- 
+
+
+
+
+
+
+
+
+		<div data-role="page" id="locate">
+
+
+
+
+
 </body>
 </html>

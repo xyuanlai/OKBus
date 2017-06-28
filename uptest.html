@@ -19,8 +19,9 @@
     <meta charset="UTF-8">
 
     <title>Fusion Tables API Example: Google Chart Tools Data Table</title>
-    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+    <link rel="stylesheet" href="./jquery.mobile-1.1.0.min.css" />
+  	<script src="./jquery-1.8.2.min.js"></script>
+  	<script src="./jquery.mobile-1.1.0.min.js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load('visualization', '1', { packages: ['table'] });
@@ -37,14 +38,14 @@
 	 //alert("1");
         //var query = "SELECT"+ "'id_FC' as '代碼'"+ "," +" 'name_FC' as '名字'" + "," + "'area_FC' as '地區'" +  "," + "'intro_FC' as '簡介'" +"," + "'weather_FC' as '氣候代碼'" + "," + "'update_FC' as '更新'" +
         //    'FROM 1ZjyHNefTDemhpw54WFb4_XVw9f74vqUegY7FmFY';
-        
+
 		//var query = "SELECT ROWID FROM 1ZjyHNefTDemhpw54WFb4_XVw9f74vqUegY7FmFY&key=AIzaSyAep1ZIup3codK3u0Ma08bV0qufmNDvRL8" ;
         var query = "UPDATE 1ZjyHNefTDemhpw54WFb4_XVw9f74vqUegY7FmFY SET update_FC = '20130901' WHERE ROWID = '3'&key=AIzaSyAep1ZIup3codK3u0Ma08bV0qufmNDvRL8";
 		var queryText = encodeURIComponent(query);
 		 //alert("123");
         var gvizQuery = new google.visualization.Query(
             'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
-        		 
+
 
        // gvizQuery.send(function(response) {
 		     //alert("123");
@@ -56,7 +57,7 @@
 	 //alert("111");
 	 }
      google.setOnLoadCallback(a);
-     
+
 	 function file_load()
 	{
 	 //window.location="update002.html";
@@ -66,9 +67,9 @@
   </head>
   <body>
     <div>
-      
+
     </div>
-    <div id="visualization">	             
+    <div id="visualization">
     </div>
   </body>
 </html>

@@ -19,8 +19,9 @@
     <meta charset="UTF-8">
 
     <title>Fusion Tables API Example: Google Chart Tools Data Table</title>
-    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+    <link rel="stylesheet" href="./jquery.mobile-1.1.0.min.css" />
+  	<script src="./jquery-1.8.2.min.js"></script>
+  	<script src="./jquery.mobile-1.1.0.min.js"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load('visualization', '1', { packages: ['table'] });
@@ -37,16 +38,16 @@
 	 //alert("1");
         var query = "SELECT"+ "'id_FC' as '代碼'"+ "," +" 'name_FC' as '名字'" + "," + "'area_FC' as '地區'" +  "," + "'intro_FC' as '簡介'" +"," + "'weather_FC' as '氣候代碼'" + "," + "'update_FC' as '更新'" +
             'FROM 1ZjyHNefTDemhpw54WFb4_XVw9f74vqUegY7FmFY';
-     
+
         var queryText = encodeURIComponent(query);
-		 
+
         var gvizQuery = new google.visualization.Query(
             'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
-        		 
-   
+
+
         gvizQuery.send(function(response) {
-		  numRows = response.getDataTable().getNumberOfRows();  
-          numCols = response.getDataTable().getNumberOfColumns(); 
+		  numRows = response.getDataTable().getNumberOfRows();
+          numCols = response.getDataTable().getNumberOfColumns();
 		  content_ID = [numRows];
 		  content_FN = [numRows];
 		  content_FA = [numRows];
@@ -66,10 +67,10 @@
 		   //alert("2");
 	 var db = window.openDatabase("Field_Inform58", "1.0", "飛場資訊", 1000000);
 	    db.transaction(function (tx) {
-	
+
 	 tx.executeSql('CREATE TABLE IF NOT EXISTS Field_Inform58 (id_FC TEXT NOT NULL, name_FC TEXT NOT NULL, area_FC TEXT NOT NULL, intro_FC TEXT NOT NULL, weather_FC TEXT NOT NULL, update_FC TEXT NOT NULL, favorite TEXT NOT NULL)');
      //alert(content_ID[2]+content_FN[2]+content_NA[2]+"1");
-	 
+
 	 tx.executeSql(
                     'SELECT id_FC FROM Field_Inform58',[],function(tx, rs) {
 					//alert("000");
@@ -77,7 +78,7 @@
 					//alert(rs.rows.length);
 					//alert(count);
 					//alert(numRows);
-					
+
 					for(var iii=count;iii<=numRows-1;iii++)
 	 {
 	 //alert("456");
@@ -94,7 +95,7 @@
 	 //var SQLL = 'UPDATE Field_Inform58 SET id_FC='+ content_ID[ii]+',name_FC='+content_FN[ii]+',area_FC='+content_FA[ii]+',intro_FC='+content_FI[ii]+',weather_FC='+content_FW[ii]+',update_FC='+content_FU[ii]+' WHERE id_FC=2';
 	 var SQLL = 'UPDATE Field_Inform58 SET id_FC='+ content_ID[ii]+',name_FC='+content_FN[ii]+',area_FC='+content_FA[ii]+',intro_FC='+content_FI[ii]+',weather_FC='+content_FW[ii]+',update_FC='+content_FU[ii]+' WHERE id_FC='+content_ID[ii]+' AND update_FC<'+ content_FU[ii];
      //var SQLL = 'UPDATE Field_Inform58 SET id_FC='+ content_ID[ii]+',name_FC='+content_FN[ii]+',area_FC='+content_NA[ii]+',img_update='+content_IU[ii]+' WHERE img_update<'+content_IU[ii]+' AND ID_news='+ content_ID[ii];
-	
+
 	 //var SQLL = 'UPDATE Field_Inform58 SET id_FC='+ content_ID[ii]+',name_FC='+content_FN[ii]+',area_FC='+content_FA[ii]+',intro_FC='+content_FI[ii]+',weather_FC='+content_FW[ii]+',update_FC='+content_FU[ii]+ 'WHERE id_FC='+content_ID[ii] ;
      //alert(content_FU[ii]);
 	  tx.executeSql(SQLL);
@@ -120,7 +121,7 @@
 	 //alert("111");
 	 }
      google.setOnLoadCallback(a);
-     
+
 	 function file_load()
 	{
 	 //window.location="update002.html";
@@ -130,9 +131,9 @@
   </head>
   <body>
     <div>
-      
+
     </div>
-    <div id="visualization">	             
+    <div id="visualization">
     </div>
   </body>
 </html>
